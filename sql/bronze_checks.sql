@@ -3,7 +3,7 @@ SELECT COUNT(*) FROM bronze.crm_cust_info;
 
 SELECT * FROM bronze.crm_cust_info LIMIT 10;
 
-SELECT cst_id, COUNT(*)
+SELECT cst_id, COUNT(*) AS count_duplicates
 FROM bronze.crm_cust_info
 GROUP BY cst_id
 HAVING COUNT(*) > 1;
@@ -30,21 +30,21 @@ WHERE prd_id IS NULL;
 SELECT COUNT(*) FROM bronze.crm_sales_details;
 SELECT * FROM bronze.crm_sales_details LIMIT 10;   
 
-SELECT sls_ord_num, COUNT(*)
+SELECT sls_prd_key, COUNT(*) AS count_duplicates
 FROM bronze.crm_sales_details
-GROUP BY sls_ord_num
+GROUP BY sls_prd_key
 HAVING COUNT(*) > 1;
 
 SELECT COUNT(*) AS null_count
 FROM bronze.crm_sales_details
-WHERE sls_ord_num IS NULL; 
+WHERE sls_prd_key IS NULL; 
 
 -- check row counts, duplicates, and nulls in erp_cust_az12
 SELECT COUNT(*) FROM bronze.erp_cust_az12;
 
 SELECT * FROM bronze.erp_cust_az12 LIMIT 10;
 
-SELECT cid, COUNT(*)
+SELECT cid, COUNT(*) AS count_duplicates
 FROM bronze.erp_cust_az12
 GROUP BY cid
 HAVING COUNT(*) > 1;
