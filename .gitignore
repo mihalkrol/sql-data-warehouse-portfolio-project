@@ -1,0 +1,39 @@
+# =========================
+# macOS system files
+# =========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# macOS resource forks
+__MACOSX/
+
+# =========================
+# Draw.io backup files
+# =========================
+*.bkp
+*.drawio.bkp
+
+# =========================
+# Temporary / editor files
+# =========================
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Environment files
+# =========================
+.env
+
+# =========================
+# Docker (optional – jeśli kiedyś dodasz)
+# =========================
+docker-data/
