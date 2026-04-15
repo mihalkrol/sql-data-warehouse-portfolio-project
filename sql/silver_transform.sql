@@ -1,4 +1,14 @@
+\set ON_ERROR_STOP on
+\timing ON
+
+
+\echo 'STARTING TRANSFORMATIONS'
+\echo '-----------------------------------------------'
+\echo '-----------------------------------------------'
+
 -- silver.crm_cust_info truncate and insert with transformations
+\echo 'silver.crm_cust_info TRUNCATE AND INSERT WITH TRANSFORMATIONS'
+\echo '----------------------------------------------- '
 
 TRUNCATE TABLE silver.crm_cust_info;
 
@@ -33,7 +43,8 @@ FROM bronze.crm_cust_info
 WHERE flag_last = 1;
 
 -- silver.crm_prd_info truncate and insert with transformations
-
+\echo 'silver.crm_prd_info TRUNCATE AND INSERT WITH TRANSFORMATIONS'
+\echo '----------------------------------------------- '
 TRUNCATE TABLE silver.crm_prd_info;
 
 INSERT INTO silver.crm_prd_info (
@@ -60,10 +71,13 @@ END AS prd_line,
 CAST(prd_start_dt AS DATE) AS prd_start_dt,
 -- fixing end date (no overlapping production series)
 CAST(LEAD(prd_start_dt) OVER (PARTITION BY prd_key ORDER BY prd_start_dt) - INTERVAL '1 day' AS DATE)  AS prd_end_dt_test
-FROM bronze.crm_prd_info
+FROM bronze.crm_prd_info;
 
 
 -- silver.crm_sales_details truncate and insert with transformations
+
+\echo 'silver.crm_sales_details TRUNCATE AND INSERT WITH TRANSFORMATIONS'
+\echo '----------------------------------------------- '
 
 TRUNCATE TABLE silver.crm_sales_details;
 
@@ -105,6 +119,9 @@ FROM bronze.crm_sales_details;
 
 -- silver.erp_cust_az12 truncate and insert with transformations
 
+\echo 'silver.erp_cust_az12 TRUNCATE AND INSERT WITH TRANSFORMATIONS'
+\echo '----------------------------------------------- '
+
 TRUNCATE TABLE silver.erp_cust_az12;
 
 INSERT INTO silver.erp_cust_az12 (
@@ -125,6 +142,9 @@ FROM bronze.erp_cust_az12;
 
 -- silver.erp_loc_a101 truncate and insert with transformations
 
+\echo 'silver.erp_loc_a101 TRUNCATE AND INSERT WITH TRANSFORMATIONS'
+\echo '----------------------------------------------- '
+
 TRUNCATE TABLE silver.erp_loc_a101;
 
 INSERT INTO silver.erp_loc_a101 (
@@ -143,6 +163,9 @@ FROM bronze.erp_loc_a101;
 
 -- silver.px_cat_g1v2 truncate and insert with transformations
 
+\echo 'silver.px_cat_g1v2 TRUNCATE AND INSERT WITH TRANSFORMATIONS'
+\echo '----------------------------------------------- '
+
 TRUNCATE TABLE silver.px_cat_g1v2;
 
 INSERT INTO silver.px_cat_g1v2 (
@@ -155,3 +178,7 @@ INSERT INTO silver.px_cat_g1v2 (
 SELECT
 id, cat, subcat, maintnance
 FROM bronze.px_cat_g1v2;
+
+
+\echo '-----------------------------------------------'
+\echo 'TRANSFORMATIONS COMPLETE'  
